@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VisaMoTion — Knowledge Base Library</title>
+<meta name="description" content="VisaMoTion Knowledge Base Library — 8 reference PDFs + companions for Gemini Gem.">
+<style>
+  :root{
+    --navy:#0B1F3A; --blue:#1455D9; --cyan:#20C7D9; --white:#F8FAFC;
+    --slate:#334155; --slate-soft:#64748B; --gold:#D6A84F; --line:#E2E8F0;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,'Noto Sans',sans-serif;
+    color:var(--slate);background:var(--white);line-height:1.55;
+    min-height:100dvh;
+  }
+  .hero{
+    position:relative;overflow:hidden;color:#fff;
+    padding:clamp(40px,8vw,72px) clamp(16px,4vw,40px) clamp(40px,6vw,56px);
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(32,199,217,.35), transparent 62%),
+      radial-gradient(700px 500px at 5% 110%, rgba(20,85,217,.5), transparent 60%),
+      linear-gradient(158deg,#081729,#0B1F3A 46%,#122E52);
+  }
+  .hero .grid{position:absolute;inset:0;opacity:.12;
+    background-image:linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px);
+    background-size:44px 44px;pointer-events:none}
+  .hero-inner{position:relative;max-width:1180px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:clamp(24px,5vw,38px)}
+  .chip{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 8px 22px rgba(32,199,217,.45);flex-shrink:0}
+  .chip svg{width:26px;height:26px}
+  .brand b{font-size:clamp(17px,4vw,19px);letter-spacing:.02em}
+  .brand span{display:block;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:2px}
+  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);font-weight:700}
+  h1{font-family:Georgia,'Noto Serif',serif;font-size:clamp(28px,7vw,46px);line-height:1.12;margin:14px 0 18px;max-width:820px;letter-spacing:-.01em}
+  .rule{width:90px;height:5px;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--blue));margin:0 0 18px}
+  .hero p{font-size:clamp(15px,3.5vw,17px);color:rgba(255,255,255,.85);max-width:680px;font-weight:300}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+  .stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;min-width:100px;backdrop-filter:blur(8px)}
+  .stat .n{font-family:Georgia,serif;font-size:clamp(22px,5vw,28px);font-weight:700;color:#fff}
+  .stat .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:3px}
+  main{max-width:1180px;margin:0 auto;padding:clamp(32px,6vw,48px) clamp(16px,4vw,40px) 80px}
+  .sec-title{font-family:Georgia,'Noto Serif',serif;font-size:clamp(22px,5vw,26px);color:var(--navy);margin-bottom:6px}
+  .sec-sub{color:var(--slate-soft);margin-bottom:22px;font-size:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+    display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease,border-color .2s;
+    box-shadow:0 1px 3px rgba(15,23,42,.05);-webkit-tap-highlight-color:transparent;
+  }
+  .card:hover,.card:focus-within{transform:translateY(-4px);box-shadow:0 16px 36px rgba(15,23,42,.12);border-color:#c7d6f4}
+  .card .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .num{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#e8f1ff,#dbeafe);color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:0 0 auto}
+  .pages{font-size:10px;color:var(--slate-soft);background:var(--white);border:1px solid var(--line);border-radius:99px;padding:3px 9px;white-space:nowrap}
+  .card h3{font-size:15px;color:var(--navy);line-height:1.35;margin-bottom:6px}
+  .card p{font-size:13px;color:var(--slate-soft);flex:1;margin-bottom:14px}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+  .tag{font-size:10px;background:#eef4ff;color:var(--blue);border:1px solid #d7e3fa;border-radius:99px;padding:3px 8px;font-weight:600}
+  .dl{display:inline-flex;align-items:center;gap:7px;justify-content:center;text-decoration:none;
+    background:var(--navy);color:#fff;border-radius:10px;padding:12px 16px;font-size:13px;font-weight:600;
+    transition:background .15s,transform .15s;width:100%;min-height:44px}
+  .dl:hover,.dl:active{background:var(--blue)}
+  .dl:active{transform:scale(.98)}
+  .dl svg{width:15px;height:15px;flex-shrink:0}
+  .companion{background:linear-gradient(135deg,#f0f7ff,#e8f9fb);border:1px solid #d3e6f8}
+  .companion .num{background:linear-gradient(135deg,#e2f8fb,#d3f0f6);color:#0e7490}
+  .note{margin-top:32px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--cyan);border-radius:12px;padding:18px 20px}
+  .note h4{color:var(--navy);font-size:15px;margin-bottom:8px}
+  .note ol{margin-left:18px;font-size:13.5px}
+  .note li{margin-bottom:6px}
+  .note .bn{font-size:13.5px;color:var(--slate);margin-top:10px}
+  footer{text-align:center;color:var(--slate-soft);font-size:12px;padding:0 16px 48px}
+  .warn{margin-top:24px;background:#fbf5e8;border:1px solid #ebd9a9;border-radius:12px;padding:16px 18px;font-size:13.5px;color:#7a5a10}
+  .warn b{color:#8a6412}
+  @media(max-width:480px){
+    .stats{gap:8px}
+    .stat{min-width:calc(50% - 4px);flex:1 1 calc(50% - 4px);padding:10px 12px}
+    .cards{gap:14px}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="grid"></div>
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.4l8.6 3.6v6.1c0 5-3.6 8.7-8.6 9.5-5-0.8-8.6-4.5-8.6-9.5V6z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.2 12.2l2.6 2.6 5-5.4" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><b>VisaMoTion</b><span>Pte. Ltd. · Global Visa Services</span></div>
+    </div>
+    <div class="eyebrow">Knowledge Base · Gemini Gem Reference Library</div>
+    <h1>Your Business Brain, In Ten Polished PDFs</h1>
+    <div class="rule"></div>
+    <p>A complete, visually premium, compliance-safe knowledge library for VisaMoTion — ready to upload into your Gemini Gem so every marketing plan, proposal, brochure, and client message follows one consistent voice and one set of rules.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">8</div><div class="l">Reference PDFs</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">Companion Files</div></div>
+      <div class="stat"><div class="n">121</div><div class="l">Designed Pages</div></div>
+      <div class="stat"><div class="n">EN / BN</div><div class="l">Bilingual</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h2 class="sec-title">Reference Documents</h2>
+  <p class="sec-sub">Upload these eight focused PDFs to your Gem's Knowledge section. Each covers one clear subject so the AI knows exactly where to look.</p>
+  <div class="cards" id="cards"></div>
+
+  <h2 class="sec-title" style="margin-top:48px">Companion Files</h2>
+  <p class="sec-sub">Read these first — one gives you the overview, the other lets you finalise every placeholder.</p>
+  <div class="cards" id="companions"></div>
+
+  <div class="note">
+    <h4>How to use this library</h4>
+    <ol>
+      <li>Open the Gemini Gem editor → <b>Knowledge</b> → add files from your device or Google Drive.</li>
+      <li>Upload PDFs 1–6 first; add 7, 8 and the companion files as space allows.</li>
+      <li>Paste the <b>Knowledge File Usage Rules</b> at the end of your Gem instructions.</li>
+      <li>Fill in the <b>Placeholders &amp; Data Request</b> file to replace every <em>[TO BE CONFIRMED]</em>.</li>
+      <li>Test with the sample prompt in the <b>Executive Summary</b> before relying on it.</li>
+    </ol>
+    <p class="bn">নোট: কোনো ফাইলে তথ্য পরিবর্তন হলে নতুন version upload করুন এবং পুরোনো ফাইল সরিয়ে দিন।</p>
+  </div>
+
+  <div class="warn">
+    <b>Compliance reminder:</b> This library deliberately marks unconfirmed details as <em>[TO BE CONFIRMED]</em> and never guarantees visa approval, jobs, or government outcomes. Verify all time-sensitive visa facts against official sources before publishing.
+  </div>
+</main>
+
+<footer>VisaMoTion Pte. Ltd. · Internal Strategic Reference · Version 1.0 · September 2026</footer>
+
+<script>
+const docs = [
+  {n:1,t:"Company Profile & Brand Identity",d:"Who VisaMoTion is, mission, values, positioning, audience, and the approved claim framework.",p:12,f:"VisaMoTion_1_Company_Profile_and_Brand_Identity.pdf",tags:["Company Facts","Brand Voice","Claims"]},
+  {n:2,t:"Brand Guidelines",d:"Logo usage, colour system, typography, layout grid, imagery rules, and accessibility standards.",p:12,f:"VisaMoTion_2_Brand_Guidelines.pdf",tags:["Colour","Type","Layout","Do & Don't"]},
+  {n:3,t:"Services & Offers Reference",d:"Every service category, deliverables, exclusions, the offer ladder, and fee transparency rules.",p:14,f:"VisaMoTion_3_Services_and_Offers.pdf",tags:["Services","Deliverables","Pricing"]},
+  {n:4,t:"Digital Marketing & Client Acquisition Playbook",d:"Strategy, channels, funnel, SEO, paid ads, content calendar, KPI dashboard, and the 30/60/90-day plan.",p:15,f:"VisaMoTion_4_Digital_Marketing_Playbook.pdf",tags:["Channels","Funnel","KPIs","SEO"]},
+  {n:5,t:"Lead Generation, Sales & Outreach System",d:"ICP, qualification, lead scoring, outreach sequences, objection handling, proposals, and CRM pipeline.",p:12,f:"VisaMoTion_5_Client_Acquisition_and_Sales.pdf",tags:["Lead Scoring","Outreach","Sales Scripts"]},
+  {n:6,t:"Visa Service Marketing & Compliance Guide",d:"The mandatory rules: no-guarantee, no-fraud, fee separation, data protection, refusals, and escalation.",p:11,f:"VisaMoTion_6_Visa_Service_Compliance.pdf",tags:["Compliance","Disclaimers","Data"]},
+  {n:7,t:"Content & Copywriting Library",d:"Bilingual templates for website, social, video, email, and client care — all claim-safe.",p:15,f:"VisaMoTion_7_Content_and_Copy_Library.pdf",tags:["Templates","Bilingual","Email"]},
+  {n:8,t:"CRM, Automation & Operations SOP",d:"CRM stages, automation rules, nine documented SOPs, quality gates, and governance rhythm.",p:17,f:"VisaMoTion_8_Operations_and_Automation_SOP.pdf",tags:["CRM","Automation","SOPs"]}
+];
+const companions = [
+  {n:"E",t:"Executive Summary",d:"A one-document overview of the whole library, the governing principles, and the decisions you must make.",p:9,f:"VisaMoTion_Executive_Summary_v1.pdf",tags:["Overview","Next Steps"],c:true},
+  {n:"P",t:"Placeholders & Data Request",d:"Every field VisaMoTion must confirm to finalise the library — in one fillable checklist.",p:4,f:"VisaMoTion_Placeholders_and_Data_Request_v1.pdf",tags:["Action Required","Checklist"],c:true},
+  {n:"G",t:"Gem Instruction Pack",d:"Ready-to-paste Gem instructions, the Knowledge File Usage Rules, a reusable PDF prompt, and the pre-upload checklist.",p:"text",f:"VisaMoTion_Gem_Instruction_Pack.txt",tags:["Instructions","Prompts"],c:true}
+];
+const dlIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+function card(o){
+  const badge = o.c ? `<div class="num">${o.n}</div>` : `<div class="num">${String(o.n).padStart(2,'0')}</div>`;
+  const tags = (o.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  const pg = o.p === "text" ? "text file" : `${o.p} pages`;
+  const label = o.f.endsWith(".txt") ? "Download File" : "Download PDF";
+  return `<div class="card ${o.c?'companion':''}">
+    <div class="top">${badge}<span class="pages">${pg}</span></div>
+    <h3>${o.t}</h3>
+    <p>${o.d}</p>
+    <div class="tags">${tags}</div>
+    <a class="dl" href="${o.f}" download>${dlIcon} ${label}</a>
+  </div>`;
+}
+document.getElementById('cards').innerHTML = docs.map(card).join('');
+document.getElementById('companions').innerHTML = companions.map(card).join('');
+</script>
+</body>
+</html>
